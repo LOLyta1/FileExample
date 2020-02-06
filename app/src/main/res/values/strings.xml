@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FileExample</string>
+    <string name="send_button_text">SEND</string>
+    <string name="show_button_text">SHOW</string>
+</resources>
