@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">FileExample</string>
-    <string name="send_button_text">SEND</string>
+    <string name="save_button_text">SAVE</string>
     <string name="show_button_text">SHOW</string>
+    <string name="load_button_text">LOAD</string>
+    <string name="text_content_text">Текст файла:</string>
 </resources>
