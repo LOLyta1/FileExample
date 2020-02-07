@@ -7,6 +7,6 @@ interface IView {
     val mContext : Context?
     fun showFileText(fileText : String)
     fun showError(ex:Exception)
-    fun showInfoMessage(message:String)
+    fun showLog(message:String)
 
 }
