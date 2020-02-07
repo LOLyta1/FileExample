@@ -11,12 +11,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val fragments = arrayListOf(FragmentInternal(), FragmentExternal())
+        val titles = arrayListOf("Internal", "External")
 
-        view_pager.adapter= PagerAdapterFragments(supportFragmentManager, arrayListOf<Fragment>(FragmentInternal(),FragmentExternal()),
-            arrayListOf("Internal","External","") )
-        tab_layout.setupWithViewPager(view_pager,false)
+        view_pager.adapter = PagerAdapterFragments(supportFragmentManager, fragments, titles)
+        tab_layout.setupWithViewPager(view_pager, false)
     }
 }

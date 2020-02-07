@@ -7,5 +7,7 @@
     
     <string name="fragment_internal_title_text">INTERNAL STORAGE</string>
     <string name="fragment_external_title_text">EXTERNAL STORAGE</string>
+    <string name="internal_radio_button_text">internal</string>
+    <string name="external_radio_button_text">EXTERNAL STORAGE</string>
 
 </resources>
