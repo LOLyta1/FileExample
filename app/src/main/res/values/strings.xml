@@ -4,4 +4,8 @@
     <string name="show_button_text">SHOW</string>
     <string name="load_button_text">LOAD</string>
     <string name="text_content_text">Текст файла:</string>
+    
+    <string name="fragment_internal_title_text">INTERNAL STORAGE</string>
+    <string name="fragment_external_title_text">EXTERNAL STORAGE</string>
+
 </resources>

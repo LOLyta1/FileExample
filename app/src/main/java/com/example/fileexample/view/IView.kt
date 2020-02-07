@@ -1,8 +1,12 @@
 package com.example.fileexample.view
 
 import android.content.Context
+import java.lang.Exception
 
 interface IView {
-    var context : Context
-    fun showFileText()
+    val mContext : Context?
+    fun showFileText(fileText : String)
+    fun showError(ex:Exception)
+    fun showInfoMessage(message:String)
+
 }
