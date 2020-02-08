@@ -15,11 +15,11 @@ class FilePresenter(val iView: IView) {
     fun createFile(name: String, storageType: StorageTypes, type: String?=null): File? {
         var file: File? = null
         try {
-            when (storageType) {
-                StorageTypes.INTERNAL ->  file = iView.mContext?.filesDir
-                StorageTypes.EXTERNAL_MEDIA -> file = iView.mContext?.getExternalFilesDir(type)
-                StorageTypes.INTERNAL_CACHE->file = iView.mContext?.cacheDir
-                StorageTypes.EXTERNAL_CACHE->file = iView.mContext?.externalCacheDir
+            file = when (storageType) {
+                StorageTypes.INTERNAL -> iView.mContext?.filesDir
+                StorageTypes.EXTERNAL_MEDIA -> iView.mContext?.getExternalFilesDir(type)
+                StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir
+                StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir
             }
             iView.showLog("создан файл: $name в директории ${file?.absolutePath}")
         } catch (ex: Exception) {
