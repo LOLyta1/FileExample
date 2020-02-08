@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">FileExample</string>
+
     <string name="save_button_text">SAVE</string>
     <string name="show_button_text">SHOW</string>
     <string name="load_button_text">LOAD</string>
+
     <string name="text_content_text">Текст файла:</string>
-    
 
+    <string name="internal_text">Internal</string>
+    <string name="external_text">External</string>
+    <string name="internal_cache_text">Internal cache</string>
+    <string name="external_cache_text">External cache</string>
+    <string name="dialog_storage_ok_button_text">OK</string>
+    <string name="dialog_cancel_ok_button_text">Cancel</string>
+    <string name="dialog_storage_title__text">Выберите тип хранилища</string>
 
-    <string-array name="spinner_item">
-        <item>INTERNAL STORAGE</item>
-        <item>EXTERNAL STORAGE</item>
-        <item>EXTERNAL CACHE STORAGE</item>
-        <item>INTERNAL CACHE STORAGE</item>
-    </string-array>
 </resources>
