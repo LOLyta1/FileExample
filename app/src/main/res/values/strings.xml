@@ -5,12 +5,11 @@
     <string name="load_button_text">LOAD</string>
     <string name="text_content_text">Текст файла:</string>
     
+    <string name="fragment_internal_title_text">INTERNAL STORAGE</string>
+    <string name="fragment_external_title_text">EXTERNAL STORAGE</string>
+    <string name="internal_radio_button_text">internal</string>
+    <string name="external_radio_button_text">EXTERNAL STORAGE</string>
+    <string name="external_cahe_radio_button">EXTERNAL CACHE STORAGE</string>
+    <string name="internal_cache_radio_button">INTERNAL CACHE STORAGE</string>
 
-
-    <string-array name="spinner_item">
-        <item>INTERNAL STORAGE</item>
-        <item>EXTERNAL STORAGE</item>
-        <item>EXTERNAL CACHE STORAGE</item>
-        <item>INTERNAL CACHE STORAGE</item>
-    </string-array>
 </resources>
