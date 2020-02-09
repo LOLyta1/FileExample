@@ -1,6 +1,12 @@
 package com.example.fileexample.view.fragments
 
+import android.content.res.Resources
+import android.graphics.BlendMode
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.TypedValue
+import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fileexample.R
 import com.example.fileexample.view.recyclers.LogAdapter
 import com.example.fileexample.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_logs.view.*
 
 class FragmentLogs: Fragment() {
+
+    private  var viewModel:SharedViewModel?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,15 +35,15 @@ class FragmentLogs: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
-        val viewModel=activity?.let{ ViewModelProviders.of(it).get(SharedViewModel::class.java)}
+        viewModel=activity?.let{ ViewModelProviders.of(it).get(SharedViewModel::class.java)}
         viewModel?.logsList?.observe(this, Observer<ArrayList<String>> {
             (view.logs_recycler_view.adapter as LogAdapter).apply {
                 setLogsList(it)
+                notifyDataSetChanged()
             }
         })
-
-
     }
+
 
     private fun setupRecycler() {
         if (view != null) {
@@ -43,12 +52,31 @@ class FragmentLogs: Fragment() {
                 adapter = LogAdapter()
             }
 
-            view!!.logs_recycler_view?.addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL).apply {
-                    setDrawable(resources.getDrawable(R.drawable.my_devider,null))
+            view!!.logs_recycler_view?.addItemDecoration(object:RecyclerView.ItemDecoration(){
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.left=pxToDp(5)
+                    outRect.right=pxToDp(5)
+                    outRect.top=pxToDp(5)
+                    outRect.bottom=pxToDp(5)
                 }
-            )
+
+                override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+                    super.onDraw(c, parent, state)
+                    c.drawColor(resources.getColor(R.color.colorPrimaryLight,null))
+
+                }
+            })
 
         }
+    }
+
+    private fun pxToDp(value: Int): Int {
+        return TypedValue.applyDimension(COMPLEX_UNIT_DIP, value.toFloat(), Resources.getSystem().displayMetrics).toInt()
     }
 }
