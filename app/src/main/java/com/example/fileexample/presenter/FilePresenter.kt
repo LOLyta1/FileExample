@@ -1,19 +1,12 @@
 package com.example.fileexample.presenter
 
-import android.content.Context
-import android.os.Environment
 import com.example.fileexample.StorageTypes
 import com.example.fileexample.model.FileValues
 import com.example.fileexample.view.IView
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.io.FileReader
 import java.lang.Exception
-import java.nio.file.Files
-import java.text.DateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class FilePresenter(val iView: IView) {
 
@@ -53,7 +46,7 @@ fun readFile(name: String, storageType: StorageTypes) {
     private fun getStoragePath(storageType: StorageTypes):String?{
         return when(storageType){
                 StorageTypes.INTERNAL -> iView.mContext?.filesDir?.path
-                StorageTypes.EXTERNAL_MEDIA -> iView.mContext?.getExternalFilesDir(null)?.path
+                StorageTypes.EXTERNAL -> iView.mContext?.getExternalFilesDir(null)?.path
                 StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir?.path
                 StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir?.path
         }
