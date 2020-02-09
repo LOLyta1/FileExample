@@ -1,4 +1,4 @@
-package com.example.fileexample.view.recycler
+package com.example.fileexample.view.recyclers
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fileexample.R
 import kotlinx.android.synthetic.main.item_log.view.*
-import kotlin.math.log
 
 class LogAdapter: RecyclerView.Adapter<LogAdapter.LogViewHolder>() {
     var logs = ArrayList<String>()

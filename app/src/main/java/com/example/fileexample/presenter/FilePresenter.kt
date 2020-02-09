@@ -6,61 +6,58 @@ import com.example.fileexample.StorageTypes
 import com.example.fileexample.model.FileValues
 import com.example.fileexample.view.IView
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.FileReader
 import java.lang.Exception
+import java.nio.file.Files
+import java.text.DateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class FilePresenter(val iView: IView) {
 
     private var model = FileValues(name = "", content = "", storage = "")
 
-    fun createFile(name: String, storageType: StorageTypes, type: String?=null): File? {
-        var file: File? = null
-        try {
-            file = when (storageType) {
-                StorageTypes.INTERNAL -> iView.mContext?.filesDir
-                StorageTypes.EXTERNAL_MEDIA -> iView.mContext?.getExternalFilesDir(type)
-                StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir
-                StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir
-            }
-            iView.showLog("создан файл: $name в директории ${file?.absolutePath}")
-        } catch (ex: Exception) {
-            iView.showError(ex)
-        }
-        return file
-    }
 
-
-
-
-
-fun saveToFile(name: String, content: String) {
+fun createFile(name: String, content: String,storageType: StorageTypes) {
     try {
-        iView.mContext?.openFileOutput(name, Context.MODE_PRIVATE).use {
-            it?.write(content.toByteArray())
+        val path=getStoragePath(storageType)
+        if (path!= null) {
+            val streamer=FileOutputStream(File("${path}/${name}"))
+            streamer.write(content.toByteArray())
+            streamer.close()
+            iView.showLog("создан файл: $name в директории ${path}")
         }
-    } catch (e: Exception) {
-        iView.showError(e)
-    }
-
-}
-
-
-
-fun readFile(name: String) {
-    model.name = name
-    try {
-        val bufferRead = iView.mContext?.openFileInput(name)?.bufferedReader()
-        bufferRead?.forEachLine {
-            model.content += "\n" + it
-        }
-        iView.showFileText("имя файла: - ${model.name}, текст файла: ${model.content} ")
     } catch (ex: Exception) {
         iView.showError(ex)
-    }finally {
-        model=FileValues(name = "", content = "", storage = "")
     }
 }
 
+fun readFile(name: String, storageType: StorageTypes) {
+    try {
+        val path = getStoragePath(storageType)
+        if (path != null) {
+            val reader=FileInputStream("${path}/$name").reader()
+            val text=reader.readText()
+            reader.close()
+            iView.showFileText("имя файла: - ${name}, текст файла: ${text} ")
+        }
+    } catch (ex: Exception) {
+        iView.showError(ex)
+    } finally {
+        model = FileValues(name = "", content = "", storage = "")
+    }
+}
 
+    private fun getStoragePath(storageType: StorageTypes):String?{
+        return when(storageType){
+                StorageTypes.INTERNAL -> iView.mContext?.filesDir?.path
+                StorageTypes.EXTERNAL_MEDIA -> iView.mContext?.getExternalFilesDir(null)?.path
+                StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir?.path
+                StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir?.path
+        }
+   }
 
 }
 
