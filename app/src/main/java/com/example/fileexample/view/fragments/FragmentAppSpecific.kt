@@ -8,24 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.ViewModelProviders
 import com.example.fileexample.R
 import com.example.fileexample.StorageTypes
 import com.example.fileexample.presenter.FilePresenter
 import com.example.fileexample.view.IView
 import com.example.fileexample.view.dialogs.DialogStorage
-import com.example.fileexample.view.recyclers.LogAdapter
-import kotlinx.android.synthetic.main.fragment_text_file.*
-import kotlinx.android.synthetic.main.fragment_text_file.view.*
+import com.example.fileexample.view.viewpager.PagerAdapterTabState
+import com.example.fileexample.viewmodel.SharedViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_app_specific.*
+import kotlinx.android.synthetic.main.fragment_app_specific.view.*
 import java.lang.Exception
 
-class FragmentInternal() :
+class FragmentAppSpecific() :
     Fragment(),
     IView,
     DialogStorage.Listener {
 
     private var presenter: FilePresenter? = null
+    private  var  viewModel: SharedViewModel?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +35,12 @@ class FragmentInternal() :
         savedInstanceState: Bundle?
     ): View? {
         presenter = FilePresenter(this)
-        return inflater.inflate(R.layout.fragment_text_file, container, false)
+        return inflater.inflate(R.layout.fragment_app_specific, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dialog = DialogStorage().apply {setTargetFragment(this@FragmentInternal, 10)}
+        val dialog = DialogStorage().apply {setTargetFragment(this@FragmentAppSpecific, 10)}
         val manager = activity?.supportFragmentManager
 
         view.save_button.setOnClickListener {
@@ -54,22 +56,14 @@ class FragmentInternal() :
                 dialog.show(manager, "dialog")
             }
         }
-        setupRecycler()
-    }
 
-    private fun setupRecycler() {
-        if (view != null) {
-            view!!.logs_recycler_view.apply {
-                layoutManager = LinearLayoutManager(mContext)
-                adapter = LogAdapter()
+        view.show_logs_button.setOnClickListener{
+            val fragment=FragmentLogs()
+            activity?.supportFragmentManager?.beginTransaction()?.addToBackStack("log_fragment_transaction")?.replace(R.id.container_logs_app,fragment)?.commit()
             }
-            view!!.logs_recycler_view?.addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL).apply {
-                    setDrawable(resources.getDrawable(R.drawable.my_devider))
-                }
-            )
-        }
-    }
+     }
+
+
 
     override val mContext: Context?
         get() = context
@@ -96,7 +90,10 @@ class FragmentInternal() :
     }
 
     private fun logIt(text: String) {
-        ((view?.logs_recycler_view?.adapter) as LogAdapter).addItem(text)
+        if(viewModel==null){
+            viewModel=activity?.let{ViewModelProviders.of(it).get(SharedViewModel::class.java)}
+        }
+        viewModel?.logsList?.value?.add(text)
     }
 
     override fun dialogOkCLick(storage: StorageTypes, mode: Int?) {
