@@ -28,6 +28,7 @@
             android:id="@+id/internal_radio_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/internal_text" />
 
         <RadioButton

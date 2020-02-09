@@ -41,7 +41,7 @@ fun readFile(name: String, storageType: StorageTypes) {
             val reader=FileInputStream("${path}/$name").reader()
             val text=reader.readText()
             reader.close()
-            iView.showFileText("имя файла: - ${name}, текст файла: ${text} ")
+            iView.showFileText("Загружено из ${path}/${name}\n\n Tекст файла: ${text} ")
         }
     } catch (ex: Exception) {
         iView.showError(ex)

@@ -92,6 +92,7 @@ class FragmentInternal() :
 
     override fun showLog(message: String) {
         logIt(message)
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     private fun logIt(text: String) {
