@@ -14,5 +14,6 @@
     <string name="dialog_storage_ok_button_text">OK</string>
     <string name="dialog_cancel_ok_button_text">Cancel</string>
     <string name="dialog_storage_title__text">Выберите тип хранилища</string>
+    <string name="show_logs_menu_item_text">SHOW LOGS</string>
 
 </resources>

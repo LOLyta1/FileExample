@@ -2,10 +2,13 @@ package com.example.fileexample.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 
 import com.example.fileexample.R
 import com.example.fileexample.view.fragments.FragmentMedia
 import com.example.fileexample.view.fragments.FragmentAppSpecific
+import com.example.fileexample.view.fragments.FragmentLogs
 import com.example.fileexample.view.viewpager.PagerAdapterTabState
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,17 +16,35 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         view_pager.adapter = PagerAdapterTabState(supportFragmentManager).apply {
-            addFragment("AppSpecific",FragmentAppSpecific())
-            addFragment("Media",FragmentMedia())
+        view_pager.adapter = PagerAdapterTabState(supportFragmentManager).apply {
+            addFragment("App Specific", FragmentAppSpecific())
+            addFragment("Media", FragmentMedia())
         }
 
         tab_layout.setupWithViewPager(view_pager, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_activity_show_logs_item -> {
+                if(supportFragmentManager.findFragmentByTag("log_fragment_transaction")==null) {
+                    supportFragmentManager.beginTransaction()
+                        .addToBackStack("log_fragment_transaction")
+                        .replace(R.id.container_logs_app, FragmentLogs())
+                        .commit()
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

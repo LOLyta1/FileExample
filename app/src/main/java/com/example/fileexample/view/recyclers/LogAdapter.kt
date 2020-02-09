@@ -33,6 +33,7 @@ class LogAdapter : RecyclerView.Adapter<LogAdapter.LogViewHolder>() {
 
     fun setLogsList(list: ArrayList<String>) {
         logs = list
+        notifyDataSetChanged()
     }
 
 }
