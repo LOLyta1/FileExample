@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SharedViewModel: ViewModel() {
-    var logsList=MutableLiveData<ArrayList<String>>()
-    init {
-        logsList.value= ArrayList<String>()
+class SharedViewModel : ViewModel() {
+    val logsList = MutableLiveData(ArrayList<String>())
+
+    fun addItem(item: String) {
+        this.logsList.value = logsList.value?.plus(item) as ArrayList<String>
     }
 }
