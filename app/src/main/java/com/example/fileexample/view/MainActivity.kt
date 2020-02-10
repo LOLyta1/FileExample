@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             addFragment("Shared pref", FragmentSharedPref())
             addFragment("Database",FragmentDatabase())
         }
-
         tab_layout.setupWithViewPager(view_pager, false)
     }
 

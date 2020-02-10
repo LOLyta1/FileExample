@@ -26,11 +26,6 @@ class LogAdapter : RecyclerView.Adapter<LogAdapter.LogViewHolder>() {
 
     override fun getItemCount() = logs.size
 
-    fun addItem(log: String) {
-        logs.add(log)
-        notifyDataSetChanged()
-    }
-
     fun setLogsList(list: ArrayList<String>) {
         logs = list
         notifyDataSetChanged()
