@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.fileexample"
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -64,4 +64,6 @@ dependencies {
 
     //for ViewModelProviders
     implementation "android.arch.lifecycle:extensions:1.1.1"
+
+
 }

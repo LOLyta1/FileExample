@@ -6,9 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 import com.example.fileexample.R
-import com.example.fileexample.view.fragments.FragmentMedia
-import com.example.fileexample.view.fragments.FragmentAppSpecific
-import com.example.fileexample.view.fragments.FragmentLogs
+import com.example.fileexample.view.fragments.*
 import com.example.fileexample.view.viewpager.PagerAdapterTabState
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         view_pager.adapter = PagerAdapterTabState(supportFragmentManager).apply {
             addFragment("App Specific", FragmentAppSpecific())
             addFragment("Media", FragmentMedia())
+            addFragment("Shared pref", FragmentSharedPref())
+            addFragment("Database",FragmentDatabase())
         }
 
         tab_layout.setupWithViewPager(view_pager, false)
