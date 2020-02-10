@@ -15,7 +15,7 @@ class FilePresenter(val iView: IView) {
 
 fun createFile(name: String, content: String,storageType: StorageTypes) {
     try {
-        val path=getStoragePath(storageType)
+        val path=getStoragePath(storageType,iView)
         if (path!= null) {
             val streamer=FileOutputStream(File("${path}/${name}"))
             streamer.write(content.toByteArray())
@@ -29,7 +29,7 @@ fun createFile(name: String, content: String,storageType: StorageTypes) {
 
 fun readFile(name: String, storageType: StorageTypes) {
     try {
-        val path = getStoragePath(storageType)
+        val path = getStoragePath(storageType,iView)
         if (path != null) {
             val reader=FileInputStream("${path}/$name").reader()
             val text=reader.readText()
@@ -42,15 +42,16 @@ fun readFile(name: String, storageType: StorageTypes) {
         model = FileValues(name = "", content = "", storage = "")
     }
 }
-
-    private fun getStoragePath(storageType: StorageTypes):String?{
+    fun getStoragePath(storageType: StorageTypes, iView: IView):String?{
         return when(storageType){
-                StorageTypes.INTERNAL -> iView.mContext?.filesDir?.path
-                StorageTypes.EXTERNAL -> iView.mContext?.getExternalFilesDir(null)?.path
-                StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir?.path
-                StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir?.path
+            StorageTypes.INTERNAL -> iView.mContext?.filesDir?.path
+            StorageTypes.EXTERNAL -> iView.mContext?.getExternalFilesDir(null)?.path
+            StorageTypes.INTERNAL_CACHE-> iView.mContext?.cacheDir?.path
+            StorageTypes.EXTERNAL_CACHE-> iView.mContext?.externalCacheDir?.path
+            else->null
         }
-   }
+    }
+
 
 }
 

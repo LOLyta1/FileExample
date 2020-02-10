@@ -1,11 +1,13 @@
 package com.example.fileexample.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 
 import com.example.fileexample.R
+import com.example.fileexample.presenter.MediaPresenter
 import com.example.fileexample.view.fragments.*
 import com.example.fileexample.view.viewpager.PagerAdapterTabState
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,5 +47,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 }

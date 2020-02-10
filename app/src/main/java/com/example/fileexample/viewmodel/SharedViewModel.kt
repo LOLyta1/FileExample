@@ -7,9 +7,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class SharedViewModel : ViewModel() {
-    val logsList = MutableLiveData(ArrayList<String>())
+    var array=ArrayList<String>()
+    val logsList = MutableLiveData(array)
 
     fun addItem(item: String) {
-        this.logsList.value = logsList.value?.plus(item) as ArrayList<String>
+          array.add(item)
+          logsList.value=array
     }
+
 }

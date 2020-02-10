@@ -40,7 +40,7 @@ class FragmentAppSpecific() :
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_fragment_app_specfic,menu)
+        inflater.inflate(R.menu.menu_add_and_save,menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
