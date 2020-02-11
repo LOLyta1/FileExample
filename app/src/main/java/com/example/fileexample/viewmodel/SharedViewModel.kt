@@ -1,18 +1,26 @@
 package com.example.fileexample.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.util.*
+import com.example.fileexample.model.VideoFile
 import kotlin.collections.ArrayList
 
 class SharedViewModel : ViewModel() {
-    var array=ArrayList<String>()
-    val logsList = MutableLiveData(array)
+    var logsArray=ArrayList<String>()
+    val logsMutableList = MutableLiveData(logsArray)
 
-    fun addItem(item: String) {
-          array.add(item)
-          logsList.value=array
+    var videosList = ArrayList<VideoFile>()
+    var videosMutableList = MutableLiveData(videosList)
+
+
+    fun addLog(log: String) {
+          logsArray.add(log)
+          logsMutableList.value=logsArray
+    }
+
+    fun addVideo(video:VideoFile){
+        videosList.add(video)
+        videosMutableList.value=videosList
     }
 
 }

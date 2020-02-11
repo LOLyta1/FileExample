@@ -1,11 +1,9 @@
 package com.example.fileexample.view.fragments
 
 import android.content.res.Resources
-import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.LayoutInflater
@@ -14,14 +12,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fileexample.R
 import com.example.fileexample.view.recyclers.LogAdapter
 import com.example.fileexample.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_logs.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class FragmentLogs : Fragment() {
@@ -40,7 +36,7 @@ class FragmentLogs : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = activity?.let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
-        viewModel?.logsList?.observe(this, observer)
+        viewModel?.logsMutableList?.observe(this, observer)
     }
 
     override fun onCreateView(

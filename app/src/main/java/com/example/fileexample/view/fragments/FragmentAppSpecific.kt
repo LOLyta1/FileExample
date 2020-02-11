@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fileexample.R
 import com.example.fileexample.StorageTypes
-import com.example.fileexample.presenter.FilePresenter
-import com.example.fileexample.view.IView
+import com.example.fileexample.presenter.TextFilePresenter
+import com.example.fileexample.view.interfaces.ITextView
 import com.example.fileexample.view.dialogs.DialogStorage
 import com.example.fileexample.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_app_specific.*
@@ -18,10 +18,10 @@ import java.lang.Exception
 
 class FragmentAppSpecific() :
     Fragment(),
-    IView,
+    ITextView,
     DialogStorage.Listener {
 
-    private var presenter: FilePresenter? = null
+    private var presenter: TextFilePresenter? = null
     private var  viewModel: SharedViewModel?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,8 @@ class FragmentAppSpecific() :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        presenter = FilePresenter(this)
+        presenter =
+            TextFilePresenter(this)
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_app_specific, container, false)
     }
@@ -68,7 +69,7 @@ class FragmentAppSpecific() :
         get() = context
 
     override fun showFileText(fileText: String) {
-        viewModel?.addItem(fileText)
+        viewModel?.addLog(fileText)
         AlertDialog.Builder(mContext)
             .setIcon(android.R.drawable.ic_dialog_info)
             .setTitle("Текст файла:").setMessage(fileText)
@@ -80,13 +81,13 @@ class FragmentAppSpecific() :
     override fun showError(ex: Exception) {
         val errorText = "Ошибка чтения файла - ${ex}"
         ex.message?.let {
-            viewModel?.addItem(it)
+            viewModel?.addLog(it)
         }
         Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
     }
 
     override fun showLog(message: String) {
-        viewModel?.addItem(message)
+        viewModel?.addLog(message)
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 

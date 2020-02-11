@@ -1,13 +1,11 @@
 package com.example.fileexample.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 
 import com.example.fileexample.R
-import com.example.fileexample.presenter.MediaPresenter
 import com.example.fileexample.view.fragments.*
 import com.example.fileexample.view.viewpager.PagerAdapterTabState
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,9 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         view_pager.adapter = PagerAdapterTabState(supportFragmentManager).apply {
             addFragment("App Specific", FragmentAppSpecific())
-            addFragment("Media", FragmentMedia())
-            addFragment("Shared pref", FragmentSharedPref())
-            addFragment("Database",FragmentDatabase())
+            addFragment("Video", FragmentVideo())
+            addFragment("Audio", FragmentAudio())
+            addFragment("Image",FragmentImage())
         }
         tab_layout.setupWithViewPager(view_pager, false)
     }
